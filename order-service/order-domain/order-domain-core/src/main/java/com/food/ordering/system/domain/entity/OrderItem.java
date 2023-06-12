@@ -3,7 +3,6 @@ package com.food.ordering.system.domain.entity;
 import com.food.ordering.system.domain.valueobject.Money;
 import com.food.ordering.system.domain.valueobject.OrderId;
 import com.food.ordering.system.domain.valueobject.OrderItemId;
-import com.food.ordering.system.domain.valueobject.ProductId;
 
 public class OrderItem extends BaseEntity<OrderItemId> {
     private OrderId orderId;
@@ -11,6 +10,17 @@ public class OrderItem extends BaseEntity<OrderItemId> {
     private final int quantity;
     private final Money price;
     private final Money subTotal;
+
+    void initializeOrderItem(OrderId orderId, OrderItemId orderItemId) {
+        this.orderId = orderId;
+        super.setId(orderItemId);
+    }
+
+    boolean isPriceValid() {
+        return price.isGreaterThanZero() &&
+                price.equals(product.getPrice()) &&
+                price.multiply(quantity).equals(subTotal);
+    }
 
     private OrderItem(Builder builder) {
         super.setId(builder.orderItemId);
@@ -40,6 +50,7 @@ public class OrderItem extends BaseEntity<OrderItemId> {
     public Money getSubTotal() {
         return subTotal;
     }
+
 
     public static final class Builder {
         private OrderItemId orderItemId;
