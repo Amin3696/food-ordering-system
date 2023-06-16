@@ -21,13 +21,13 @@ import java.util.UUID;
 @Slf4j
 @Component
 public class OrderCreateCommandHandler {
-    private final OrderDomainServiceImp orderDomainService;
+    private final OrderDomainService orderDomainService;
     private final OrderRepository orderRepository;
     private final RestaurantRepository restaurantRepository;
     private final CustomerRepository customerRepository;
     private final OrderDataMapper orderDataMapper;
 
-    public OrderCreateCommandHandler(OrderDomainServiceImp orderDomainService,
+    public OrderCreateCommandHandler(OrderDomainService orderDomainService,
                                      OrderRepository orderRepository,
                                      RestaurantRepository restaurantRepository,
                                      CustomerRepository customerRepository,
